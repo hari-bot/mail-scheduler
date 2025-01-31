@@ -1,20 +1,22 @@
-"use server"
+"use server";
 
-import { createMailing as apiCreateMailing, deleteMailing as apiDeleteMailing } from "./api"
+import {
+  createMailing as apiCreateMailing,
+  deleteMailing as apiDeleteMailing,
+} from "./api";
 
 export async function createMailing(formData: FormData) {
-  const mailer = formData.get("mailer")
-  const list = formData.get("list")
-  const schedule = formData.get("schedule")
+  const mailer = formData.get("mailer") as string;
+  const list = formData.get("list") as string;
+  const schedule = formData.get("schedule") as string;
 
   if (!mailer || !list || !schedule) {
-    throw new Error("Missing required fields")
+    throw new Error("Missing required fields");
   }
 
-  return apiCreateMailing({ mailer, list, schedule })
+  return apiCreateMailing({ mailer, list, schedule });
 }
 
 export async function deleteMailing(id: string) {
-  return apiDeleteMailing(id)
+  return apiDeleteMailing(id);
 }
-

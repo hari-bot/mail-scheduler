@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getMailings, createMailing, deleteMailing } from "../api";
-import type { Mailing } from "../types";
+import type { AddMailingData, Mailing } from "../types";
 
 export const fetchMailings = createAsyncThunk(
   "mailings/fetchMailings",
@@ -12,7 +12,7 @@ export const fetchMailings = createAsyncThunk(
 
 export const addMailing = createAsyncThunk(
   "mailings/addMailing",
-  async (data: any) => {
+  async (data: AddMailingData) => {
     const response = await createMailing(data);
     return response;
   }

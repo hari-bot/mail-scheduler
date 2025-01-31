@@ -1,4 +1,4 @@
-import type { Mailing, Mailer, List } from "./types";
+import type { Mailing, Mailer, List, AddMailingData } from "./types";
 
 // Mock data
 const mailers: Mailer[] = [
@@ -47,7 +47,7 @@ export async function getLists(): Promise<List[]> {
   });
 }
 
-export async function createMailing(data: any): Promise<Mailing> {
+export async function createMailing(data: AddMailingData): Promise<Mailing> {
   const newMailing: Mailing = {
     id: String(mailings.length + 1),
     mailer: mailers.find((m) => m.id === data.mailer)!,

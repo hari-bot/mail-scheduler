@@ -27,9 +27,9 @@ export default function NewMailingForm() {
     try {
       await dispatch(
         addMailing({
-          mailer: formData.get("mailer"),
-          list: formData.get("list"),
-          schedule: formData.get("schedule"),
+          mailer: formData.get("mailer") as string,
+          list: formData.get("list") as string,
+          schedule: formData.get("schedule") as string,
         })
       ).unwrap();
       formRef.current?.reset();
