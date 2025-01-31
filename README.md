@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Here’s a polished `README.md` for your `mail-scheduler` repository. I’ve tailored it to match your project structure and added relevant details for clarity and professionalism.
 
-## Getting Started
+---
 
-First, run the development server:
+````markdown
+# Mail Scheduler
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This is a **Next.js** application for scheduling email campaigns. It allows users to create, view, and delete scheduled mailings with ease. The application is built using modern web technologies and follows best practices for state management and component architecture.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **View Scheduled Mailings**: See all scheduled email campaigns in a clean, organized list.
+- **Create New Mailings**: Schedule new email campaigns by selecting a mailer template, mailing list, and schedule date.
+- **Delete Mailings**: Remove scheduled mailings with a single click.
+- **Real-Time Updates**: The UI updates instantly when mailings are added or deleted.
+- **Responsive Design**: Built with **Tailwind CSS** for a seamless experience across devices.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+Before running the project, ensure you have the following installed:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Node.js** (v16.x or later)
+- **npm** (v8.x or later) or **yarn** (v1.x or later)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/hari-bot/mail-scheduler.git
+   cd mail-scheduler
+   ```
+````
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Run the development server**:
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. **Open the application**:
+   Visit [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+
+## Technologies Used
+
+- **Next.js 13+**: For server-side rendering and routing.
+- **React**: For building the user interface.
+- **Tailwind CSS**: For styling and responsive design.
+- **TypeScript**: For type safety and better developer experience.
+- **Server Actions**: For handling form submissions securely on the server.
+- **Mock API**: Simulates backend functionality for development purposes.
+
+---
