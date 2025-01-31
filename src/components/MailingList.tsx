@@ -1,35 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getMailings } from "@/lib/api";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 import MailingItem from "./MailingItem";
-import type { Mailing } from "@/lib/types";
 
 export default function MailingList() {
-  const [mailings, setMailings] = useState<Mailing[]>([]);
+  const {
+    items: mailings,
+    status,
+    error,
+  } = useSelector((state: RootState) => state.mailings);
 
-  useEffect(() => {
-    fetchMailings();
-  }, []);
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
-  const fetchMailings = async () => {
-    const mailingsData = await getMailings();
-    setMailings(mailingsData);
-  };
-
-  const handleMailingDeleted = (id: string) => {
-    setMailings((prevMailings) => prevMailings.filter((m) => m.id !== id));
-  };
+  if (status === "failed") {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div>
       <ul className="space-y-4 mt-4">
         {mailings.map((mailing) => (
-          <MailingItem
-            key={mailing.id}
-            mailing={mailing}
-            onMailingDeleted={() => handleMailingDeleted(mailing.id)}
-          />
+          <MailingItem key={mailing.id} mailing={mailing} />
         ))}
       </ul>
     </div>

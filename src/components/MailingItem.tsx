@@ -1,24 +1,20 @@
 "use client";
 
-import { deleteMailing } from "@/lib/api";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/lib/store";
+import { removeMailing } from "@/lib/slices/mailingsSlice";
 import type { Mailing } from "@/lib/types";
 import { useState } from "react";
 
-export default function MailingItem({
-  mailing,
-  onMailingDeleted,
-}: {
-  mailing: Mailing;
-  onMailingDeleted: () => void;
-}) {
+export default function MailingItem({ mailing }: { mailing: Mailing }) {
+  const dispatch = useDispatch<AppDispatch>();
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
     if (isDeleting) return;
     setIsDeleting(true);
     try {
-      await deleteMailing(mailing.id);
-      onMailingDeleted();
+      await dispatch(removeMailing(mailing.id)).unwrap();
     } catch (error) {
       console.error(error);
     } finally {

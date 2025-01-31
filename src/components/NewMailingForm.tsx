@@ -1,50 +1,47 @@
 "use client";
 
-import { createMailing } from "@/lib/api";
-import { getMailers, getLists } from "@/lib/api";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/lib/store";
+import { addMailing } from "@/lib/slices/mailingsSlice";
+import { fetchMailers } from "@/lib/slices/mailersSlice";
+import { fetchLists } from "@/lib/slices/listsSlice";
 import { useState, useEffect, useRef } from "react";
-import type { Mailer, List, Mailing } from "@/lib/types";
 
-export default function NewMailingForm({
-  onMailingAdded,
-}: {
-  onMailingAdded: (newMailing: Mailing) => void;
-}) {
-  const [mailers, setMailers] = useState<Mailer[]>([]);
-  const [lists, setLists] = useState<List[]>([]);
+export default function NewMailingForm() {
+  const dispatch = useDispatch<AppDispatch>();
+  const mailers = useSelector((state: RootState) => state.mailers.items);
+  const lists = useSelector((state: RootState) => state.lists.items);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const formRef = useRef<HTMLFormElement | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const [mailersData, listsData] = await Promise.all([
-        getMailers(),
-        getLists(),
-      ]);
-      setMailers(mailersData);
-      setLists(listsData);
-    };
-    fetchData();
-  }, []);
+    dispatch(fetchMailers());
+    dispatch(fetchLists());
+  }, [dispatch]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
-    const newMailing = await createMailing({
-      mailer: formData.get("mailer"),
-      list: formData.get("list"),
-      schedule: formData.get("schedule"),
-    });
-
-    setIsSubmitting(false);
-    formRef.current?.reset();
-    onMailingAdded(newMailing); // Pass new mailing to parent
+    try {
+      await dispatch(
+        addMailing({
+          mailer: formData.get("mailer"),
+          list: formData.get("list"),
+          schedule: formData.get("schedule"),
+        })
+      ).unwrap();
+      formRef.current?.reset();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label htmlFor="mailer" className="block mb-1">
           Mailer Template

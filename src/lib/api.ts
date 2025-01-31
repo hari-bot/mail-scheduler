@@ -54,7 +54,8 @@ export async function createMailing(data: any): Promise<Mailing> {
     list: lists.find((l) => l.id === data.list)!,
     schedule: new Date(data.schedule).toISOString(),
   };
-  mailings.push(newMailing);
+  mailings = [...mailings, newMailing];
+
   console.log(mailings);
   return new Promise((resolve) => {
     setTimeout(() => resolve(newMailing), 500);
