@@ -24,12 +24,11 @@ Before running the project, ensure you have the following installed:
 ## Setup
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/hari-bot/mail-scheduler.git
    cd mail-scheduler
    ```
-
-````
 
 2. **Install dependencies**:
 
@@ -60,4 +59,3 @@ Before running the project, ensure you have the following installed:
 - **Mock API**: Simulates backend functionality for development purposes.
 
 ---
-````
