@@ -1,20 +1,30 @@
-"use client"
+"use client";
 
-import { deleteMailing } from "@/lib/actions"
-import type { Mailing } from "@/lib/types"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { deleteMailing } from "@/lib/api";
+import type { Mailing } from "@/lib/types";
+import { useState } from "react";
 
-export default function MailingItem({ mailing }: { mailing: Mailing }) {
-  const [isDeleting, setIsDeleting] = useState(false)
-  const router = useRouter()
+export default function MailingItem({
+  mailing,
+  onMailingDeleted,
+}: {
+  mailing: Mailing;
+  onMailingDeleted: () => void;
+}) {
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
-    setIsDeleting(true)
-    await deleteMailing(mailing.id)
-    setIsDeleting(false)
-    router.refresh()
-  }
+    if (isDeleting) return;
+    setIsDeleting(true);
+    try {
+      await deleteMailing(mailing.id);
+      onMailingDeleted();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   return (
     <li className="bg-white shadow rounded-lg p-4">
@@ -31,6 +41,5 @@ export default function MailingItem({ mailing }: { mailing: Mailing }) {
         </button>
       </div>
     </li>
-  )
+  );
 }
-
