@@ -1,8 +1,3 @@
-Here’s a polished `README.md` for your `mail-scheduler` repository. I’ve tailored it to match your project structure and added relevant details for clarity and professionalism.
-
----
-
-````markdown
 # Mail Scheduler
 
 This is a **Next.js** application for scheduling email campaigns. It allows users to create, view, and delete scheduled mailings with ease. The application is built using modern web technologies and follows best practices for state management and component architecture.
@@ -33,6 +28,7 @@ Before running the project, ensure you have the following installed:
    git clone https://github.com/hari-bot/mail-scheduler.git
    cd mail-scheduler
    ```
+
 ````
 
 2. **Install dependencies**:
@@ -64,3 +60,4 @@ Before running the project, ensure you have the following installed:
 - **Mock API**: Simulates backend functionality for development purposes.
 
 ---
+````
