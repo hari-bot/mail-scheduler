@@ -41,7 +41,7 @@ export default function NewMailingForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label htmlFor="mailer" className="block mb-1">
           Mailer Template
